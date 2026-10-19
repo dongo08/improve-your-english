@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cebac2vnuuvw8"]
+
+[ext_resource type="Script" uid="uid://cs2atgnbyvqd3" path="res://scenes/tools/json.gd" id="1_kqxdh"]
+
+[node name="json" type="Node" unique_id=176519217]
+script = ExtResource("1_kqxdh")

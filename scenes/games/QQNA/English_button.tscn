@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dqh4en5ngwjxk"]
+
+[ext_resource type="Script" uid="uid://70tndcuxbqjg" path="res://scenes/games/QQNA/english_button.gd" id="1_p7rio"]
+
+[node name="Button" type="Button" unique_id=541415728]
+custom_minimum_size = Vector2(100, 70)
+offset_right = 8.0
+offset_bottom = 8.0
+toggle_mode = true
+text = "2193487120394123098471237489321"
+autowrap_mode = 3
+script = ExtResource("1_p7rio")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

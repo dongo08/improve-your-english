@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxkugyhqxjxtr"
+path="res://.godot/imported/「碧蓝档案OST🎵」音乐合集~Vol.1（320K）_P33_Mischievous Step（走格子）_音频_01.ogg-37946646fc20dd579cffae459657a23c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/bgm/「碧蓝档案OST🎵」音乐合集~Vol.1（320K）_P33_Mischievous Step（走格子）_音频_01.ogg"
+dest_files=["res://.godot/imported/「碧蓝档案OST🎵」音乐合集~Vol.1（320K）_P33_Mischievous Step（走格子）_音频_01.ogg-37946646fc20dd579cffae459657a23c.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

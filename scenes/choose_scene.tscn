@@ -1,0 +1,394 @@
+[gd_scene format=3 uid="uid://dyloy44dd5swo"]
+
+[ext_resource type="Script" uid="uid://bsgu3at6674br" path="res://scenes/choose_scene.gd" id="1_6bxe7"]
+[ext_resource type="AudioStream" uid="uid://cxkugyhqxjxtr" path="res://assets/sounds/bgm/「碧蓝档案OST🎵」音乐合集~Vol.1（320K）_P33_Mischievous Step（走格子）_音频_01.ogg" id="2_mihyl"]
+[ext_resource type="Script" uid="uid://3eqpt7yv0qlv" path="res://scenes/menu/config_ui.gd" id="3_si61w"]
+[ext_resource type="PackedScene" uid="uid://bb1hnyi12415k" path="res://scenes/menu/bag_and_shop.tscn" id="4_aaimd"]
+
+[node name="Control" type="Control" unique_id=1858767846 node_paths=PackedStringArray("score_text", "group_text", "stamina_text", "ranking_list", "ranking_button", "ECP_score", "ECP_date", "ECP_played", "ECP_button", "QQNA_score", "QQNA_date", "QQNA_played", "QQNA_button", "QSPE_score", "QSPE_date", "QSPE_played", "QSPE_button", "config_button", "config_area", "re_config_button", "bag_and_shop", "camera")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6bxe7")
+score_text = NodePath("VBoxContainer/Score")
+group_text = NodePath("VBoxContainer/Name")
+stamina_text = NodePath("VBoxContainer/Stamina")
+ranking_list = NodePath("rank&settings/排名")
+ranking_button = NodePath("rank&settings/HBoxContainer/rankingButton")
+ECP_score = NodePath("ECP/score")
+ECP_date = NodePath("ECP/date")
+ECP_played = NodePath("ECP/date2")
+ECP_button = NodePath("ECP/ECP")
+QQNA_score = NodePath("QQNA/score")
+QQNA_date = NodePath("QQNA/date")
+QQNA_played = NodePath("QQNA/date2")
+QQNA_button = NodePath("QQNA/QQNA")
+QSPE_score = NodePath("QSPE/score")
+QSPE_date = NodePath("QSPE/date")
+QSPE_played = NodePath("QSPE/date2")
+QSPE_button = NodePath("QSPE/QSPE")
+config_button = NodePath("rank&settings/HBoxContainer/configButton")
+config_area = NodePath("config")
+re_config_button = NodePath("config/main/VBoxContainer/Button")
+bag_and_shop = NodePath("bag_and_shop")
+camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1986715982]
+position = Vector2(576, 324)
+
+[node name="Label" type="Label" parent="." unique_id=821807449]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 50.0
+offset_right = 752.0
+offset_bottom = 149.0
+theme_override_font_sizes/font_size = 72
+text = "请选择模式"
+
+[node name="ECP" type="VBoxContainer" parent="." unique_id=939834216]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 205.0
+offset_right = 439.0
+offset_bottom = 346.0
+
+[node name="ECP" type="Button" parent="ECP" unique_id=1907183518]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "英汉配对"
+
+[node name="score" type="Label" parent="ECP" unique_id=815545623]
+layout_mode = 2
+text = "累计得分："
+
+[node name="date" type="Label" parent="ECP" unique_id=1124997429]
+layout_mode = 2
+text = "最近游玩："
+autowrap_mode = 3
+
+[node name="date2" type="Label" parent="ECP" unique_id=2011785602]
+layout_mode = 2
+text = "你体力不足"
+autowrap_mode = 3
+
+[node name="QQNA" type="VBoxContainer" parent="." unique_id=1686088195]
+layout_mode = 0
+offset_left = 724.0
+offset_top = 205.0
+offset_right = 924.0
+offset_bottom = 346.0
+
+[node name="QQNA" type="Button" parent="QQNA" unique_id=1005714132]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "快问快答"
+
+[node name="score" type="Label" parent="QQNA" unique_id=236008821]
+layout_mode = 2
+text = "累计得分："
+
+[node name="date" type="Label" parent="QQNA" unique_id=948689630]
+layout_mode = 2
+text = "最近游玩："
+autowrap_mode = 3
+
+[node name="date2" type="Label" parent="QQNA" unique_id=1409751647]
+layout_mode = 2
+text = "你体力不足"
+autowrap_mode = 3
+
+[node name="QSPE" type="VBoxContainer" parent="." unique_id=1134317689]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 378.0
+offset_right = 679.0
+offset_bottom = 519.0
+
+[node name="QSPE" type="Button" parent="QSPE" unique_id=285455553]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "快速拼写"
+
+[node name="score" type="Label" parent="QSPE" unique_id=988188842]
+layout_mode = 2
+text = "累计得分："
+
+[node name="date" type="Label" parent="QSPE" unique_id=1150754928]
+layout_mode = 2
+text = "最近游玩："
+autowrap_mode = 3
+
+[node name="date2" type="Label" parent="QSPE" unique_id=277311390]
+visible = false
+layout_mode = 2
+text = "你体力不足"
+autowrap_mode = 3
+
+[node name="Online" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 378.0
+offset_right = 439.0
+offset_bottom = 487.0
+
+[node name="onlineButton" type="Button" parent="Online"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "联机对战"
+
+[node name="tip" type="Label" parent="Online"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "和朋友各玩各的，实时比拼分数"
+autowrap_mode = 3
+horizontal_alignment = 1
+
+[node name="return" type="Button" parent="." unique_id=237530525]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 555.0
+offset_right = 608.0
+offset_bottom = 597.0
+theme_override_font_sizes/font_size = 24
+text = "返回"
+
+[node name="Label3" type="Label" parent="." unique_id=912530424]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 608.0
+offset_right = 1118.0
+offset_bottom = 631.0
+text = "更多功能敬请期待..."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1512534243]
+stream = ExtResource("2_mihyl")
+volume_db = -16.0
+autoplay = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1255213587]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 16.0
+offset_right = -22.0
+offset_bottom = 66.0
+grow_horizontal = 0
+
+[node name="Name" type="Label" parent="VBoxContainer" unique_id=689620140]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "组名"
+horizontal_alignment = 2
+
+[node name="Score" type="Label" parent="VBoxContainer" unique_id=1721074935]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "积分："
+horizontal_alignment = 2
+
+[node name="Stamina" type="Label" parent="VBoxContainer" unique_id=362515109]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "积分："
+horizontal_alignment = 2
+
+[node name="rank&settings" type="VBoxContainer" parent="." unique_id=698645365]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 16.0
+offset_right = 204.0
+offset_bottom = 551.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="rank&settings" unique_id=697958974]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="rankingButton" type="Button" parent="rank&settings/HBoxContainer" unique_id=213859228]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "排名"
+
+[node name="configButton" type="Button" parent="rank&settings/HBoxContainer" unique_id=2051719857]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "设置"
+
+[node name="排名" type="ItemList" parent="rank&settings" unique_id=513116368]
+custom_minimum_size = Vector2(200, 500)
+layout_mode = 2
+
+[node name="config" type="PanelContainer" parent="." unique_id=709850676 node_paths=PackedStringArray("username", "buttons", "remove_area", "warning_window")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_si61w")
+username = NodePath("main/BoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/usernameinput")
+buttons = NodePath("main/BoxContainer/HBoxContainer")
+remove_area = NodePath("remove")
+warning_window = NodePath("nonename")
+
+[node name="main" type="HBoxContainer" parent="config" unique_id=1937815123]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="config/main" unique_id=1302610939]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="config/main/VBoxContainer" unique_id=1699565823]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "<-"
+
+[node name="BoxContainer" type="BoxContainer" parent="config/main" unique_id=345861249]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical = true
+
+[node name="TabBar" type="TabBar" parent="config/main/BoxContainer" unique_id=972142361]
+layout_mode = 2
+current_tab = 0
+tab_count = 1
+tab_0/title = "常规"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="config/main/BoxContainer" unique_id=697243982]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="config/main/BoxContainer/ScrollContainer" unique_id=1413349240]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="config/main/BoxContainer/ScrollContainer/VBoxContainer" unique_id=573057675]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="config/main/BoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=753226291]
+layout_mode = 2
+text = "用户名："
+
+[node name="usernameinput" type="LineEdit" parent="config/main/BoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=735747957]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="config/main/BoxContainer/ScrollContainer/VBoxContainer" unique_id=740931265]
+layout_mode = 2
+
+[node name="removeButton" type="Button" parent="config/main/BoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1442097317]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.701961, 0, 0, 1)
+text = "删除账号"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="config/main/BoxContainer" unique_id=2057251524]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="config/main/BoxContainer/HBoxContainer" unique_id=711685936]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="confirmButton" type="Button" parent="config/main/BoxContainer/HBoxContainer" unique_id=1862390662]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "确认"
+
+[node name="Control2" type="Control" parent="config/main/BoxContainer/HBoxContainer" unique_id=1900182908]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="cancelButton" type="Button" parent="config/main/BoxContainer/HBoxContainer" unique_id=1403199002]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "取消"
+
+[node name="Control3" type="Control" parent="config/main/BoxContainer/HBoxContainer" unique_id=1967694422]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="remove" type="CenterContainer" parent="config" unique_id=1978292579]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="config/remove" unique_id=463738930]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="config/remove/PanelContainer" unique_id=1391728771]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="config/remove/PanelContainer/MarginContainer" unique_id=1329415761]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="config/remove/PanelContainer/MarginContainer/VBoxContainer" unique_id=902034467]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "此操作无法撤销，
+确定要删除吗？"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="config/remove/PanelContainer/MarginContainer/VBoxContainer" unique_id=756488810]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="config/remove/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1778244477]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.784314, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "确定"
+
+[node name="Button2" type="Button" parent="config/remove/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1133645503]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "取消"
+
+[node name="nonename" type="AcceptDialog" parent="config" unique_id=254342485]
+oversampling_override = 1.0
+title = "警告"
+initial_position = 1
+size = Vector2i(112, 100)
+dialog_text = "你没有改名卡"
+
+[node name="bag_and_shop" parent="." unique_id=1358317488 instance=ExtResource("4_aaimd")]
+layout_mode = 1
+
+[node name="CheckTimer" type="Timer" parent="." unique_id=1411354820]
+autostart = true
+
+[node name="debugbutton" type="Button" parent="." unique_id=1991739292]
+layout_mode = 0
+offset_left = 1074.0
+offset_top = 555.0
+offset_right = 1110.0
+offset_bottom = 586.0
+text = "+10"
+
+[connection signal="pressed" from="ECP/ECP" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="QQNA/QQNA" to="." method="_on_qqna_pressed"]
+[connection signal="pressed" from="QSPE/QSPE" to="." method="_on_qspe_pressed"]
+[connection signal="pressed" from="Online/onlineButton" to="." method="_on_online_pressed"]
+[connection signal="pressed" from="return" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="rank&settings/HBoxContainer/rankingButton" to="." method="_on_ranking_button_pressed"]
+[connection signal="pressed" from="rank&settings/HBoxContainer/configButton" to="." method="_on_config_button_pressed"]
+[connection signal="pressed" from="config/main/VBoxContainer/Button" to="." method="_on_config_button_pressed"]
+[connection signal="text_changed" from="config/main/BoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/usernameinput" to="config" method="_on_usernameinput_text_changed"]
+[connection signal="pressed" from="config/main/BoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/removeButton" to="config" method="_on_remove_button_pressed"]
+[connection signal="pressed" from="config/main/BoxContainer/HBoxContainer/confirmButton" to="config" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="config/main/BoxContainer/HBoxContainer/cancelButton" to="config" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="config/remove/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="config" method="_on_true_remove_pressed"]
+[connection signal="pressed" from="config/remove/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="config" method="_on_remove_button_pressed"]
+[connection signal="timeout" from="CheckTimer" to="." method="_on_check_timer_timeout"]
+[connection signal="pressed" from="debugbutton" to="." method="_on_debugbutton_pressed"]

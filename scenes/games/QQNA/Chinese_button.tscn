@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bbh76igfaisij"]
+
+[ext_resource type="Script" uid="uid://x3a3adhgta0w" path="res://scenes/games/QQNA/chinese_button.gd" id="1_7yx7r"]
+[ext_resource type="Script" uid="uid://b44bh1y8hcu1x" path="res://script/word/english_meaning.gd" id="2_lqy03"]
+[ext_resource type="Script" uid="uid://3s6jqsvsjw4d" path="res://script/word/word.gd" id="3_0tnb5"]
+
+[sub_resource type="Resource" id="Resource_m4cfy"]
+script = ExtResource("3_0tnb5")
+English = "123"
+Chinese = "123"
+metadata/_custom_type_script = "uid://3s6jqsvsjw4d"
+
+[node name="Button" type="Button" unique_id=1991633020]
+custom_minimum_size = Vector2(100, 70)
+offset_right = 8.0
+offset_bottom = 8.0
+toggle_mode = true
+autowrap_mode = 3
+script = ExtResource("1_7yx7r")
+word = SubResource("Resource_m4cfy")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

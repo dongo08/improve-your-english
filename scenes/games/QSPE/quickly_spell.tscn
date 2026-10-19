@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://c3t678roh5q17"]
+
+[ext_resource type="Script" uid="uid://byq72egnwuoev" path="res://scenes/games/QSPE/quickly_spell.gd" id="1_qel6w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qel6w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dtglo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wt34f"]
+
+[node name="Control" type="Control" unique_id=218516397 node_paths=PackedStringArray("label", "line_edit", "tip_label", "skip_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qel6w")
+label = NodePath("VBoxContainer/Label")
+line_edit = NodePath("VBoxContainer/HBoxContainer/LineEdit")
+tip_label = NodePath("VBoxContainer/Label/TipLabel")
+skip_button = NodePath("VBoxContainer/HBoxContainer/Button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=32267248]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control2" type="Control" parent="VBoxContainer" unique_id=253949514]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1173949277]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 80
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TipLabel" type="Label" parent="VBoxContainer/Label" unique_id=559315849]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -190.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
+vertical_alignment = 2
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1439192558]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=1384170688]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=157953333]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_qel6w")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_dtglo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wt34f")
+alignment = 1
+flat = true
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1943684661]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "跳过"
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1004021655]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TipTimer" type="Timer" parent="." unique_id=830034966]
+wait_time = 8.0
+
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="TipTimer" to="." method="_on_tip_timer_timeout"]

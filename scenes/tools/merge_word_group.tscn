@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://dli330dran56a"]
+
+[ext_resource type="Script" uid="uid://bo7k0myumiuje" path="res://scenes/tools/merge_word_group.gd" id="1_ejmvt"]
+[ext_resource type="Resource" uid="uid://c36oi7dbc7tgc" path="res://assets/U5.tres" id="2_hxo6h"]
+[ext_resource type="Resource" uid="uid://dm7w60d50yd8i" path="res://assets/134.tres" id="3_hxo6h"]
+
+[node name="merge_word_group" type="Node"]
+script = ExtResource("1_ejmvt")
+group1 = ExtResource("2_hxo6h")
+group2 = ExtResource("3_hxo6h")

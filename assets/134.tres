@@ -1,0 +1,566 @@
+[gd_resource type="Resource" script_class="WordGroup" format=3 uid="uid://dm7w60d50yd8i"]
+
+[ext_resource type="Script" uid="uid://kkuy7525c75n" path="res://script/word/word_group.gd" id="1_3q2t2"]
+[ext_resource type="Script" uid="uid://3s6jqsvsjw4d" path="res://script/word/word.gd" id="2_p34mh"]
+[ext_resource type="Script" uid="uid://b44bh1y8hcu1x" path="res://script/word/english_meaning.gd" id="3_hnxii"]
+
+[sub_resource type="Resource" id="Resource_dat7g"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "害怕的"
+
+[sub_resource type="Resource" id="Resource_qqmpq"]
+script = ExtResource("2_p34mh")
+English = "scared"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_dat7g")])
+
+[sub_resource type="Resource" id="Resource_iddhc"]
+script = ExtResource("3_hnxii")
+meaning = "妖怪"
+
+[sub_resource type="Resource" id="Resource_cv17s"]
+script = ExtResource("3_hnxii")
+meaning = "怪兽"
+
+[sub_resource type="Resource" id="Resource_3iwl7"]
+script = ExtResource("2_p34mh")
+English = "monster"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_iddhc"), SubResource("Resource_cv17s")])
+
+[sub_resource type="Resource" id="Resource_x0dab"]
+script = ExtResource("3_hnxii")
+meaning = "橱柜"
+
+[sub_resource type="Resource" id="Resource_d6f3e"]
+script = ExtResource("2_p34mh")
+English = "cupboard"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_x0dab")])
+
+[sub_resource type="Resource" id="Resource_c6g8f"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "身体的"
+
+[sub_resource type="Resource" id="Resource_rgjiu"]
+script = ExtResource("2_p34mh")
+English = "physical"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_c6g8f")])
+
+[sub_resource type="Resource" id="Resource_qoxm2"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "增加"
+
+[sub_resource type="Resource" id="Resource_t2f7m"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "扩大"
+
+[sub_resource type="Resource" id="Resource_qmji2"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "建立"
+
+[sub_resource type="Resource" id="Resource_qaq7h"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "培养"
+
+[sub_resource type="Resource" id="Resource_2hfbq"]
+script = ExtResource("2_p34mh")
+English = "build up"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_qoxm2"), SubResource("Resource_t2f7m"), SubResource("Resource_qmji2"), SubResource("Resource_qaq7h")])
+
+[sub_resource type="Resource" id="Resource_gnyu1"]
+script = ExtResource("3_hnxii")
+meaning = "焦虑"
+
+[sub_resource type="Resource" id="Resource_07u85"]
+script = ExtResource("2_p34mh")
+English = "anxiety"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_gnyu1")])
+
+[sub_resource type="Resource" id="Resource_1cryq"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "愚蠢的"
+
+[sub_resource type="Resource" id="Resource_otdy6"]
+script = ExtResource("2_p34mh")
+English = "silly"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_1cryq")])
+
+[sub_resource type="Resource" id="Resource_jariw"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "处理"
+
+[sub_resource type="Resource" id="Resource_olnmk"]
+script = ExtResource("2_p34mh")
+English = "handle"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_jariw")])
+
+[sub_resource type="Resource" id="Resource_m5e8m"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "重要的"
+
+[sub_resource type="Resource" id="Resource_4etn4"]
+script = ExtResource("2_p34mh")
+English = "essential"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_m5e8m")])
+
+[sub_resource type="Resource" id="Resource_pljfj"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "证实"
+
+[sub_resource type="Resource" id="Resource_ogsn6"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "证明"
+
+[sub_resource type="Resource" id="Resource_nu5p5"]
+script = ExtResource("2_p34mh")
+English = "confirm"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_pljfj"), SubResource("Resource_ogsn6")])
+
+[sub_resource type="Resource" id="Resource_y3j7h"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "令人害怕的"
+
+[sub_resource type="Resource" id="Resource_nqgbl"]
+script = ExtResource("2_p34mh")
+English = "scary"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_y3j7h")])
+
+[sub_resource type="Resource" id="Resource_bo8tx"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "接触"
+
+[sub_resource type="Resource" id="Resource_117ao"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "联系"
+
+[sub_resource type="Resource" id="Resource_rjb34"]
+script = ExtResource("2_p34mh")
+English = "get in touch with"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_bo8tx"), SubResource("Resource_117ao")])
+
+[sub_resource type="Resource" id="Resource_5r7x1"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "接近"
+
+[sub_resource type="Resource" id="Resource_xggc7"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "靠近"
+
+[sub_resource type="Resource" id="Resource_4cspv"]
+script = ExtResource("2_p34mh")
+English = "approach"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_5r7x1"), SubResource("Resource_xggc7")])
+
+[sub_resource type="Resource" id="Resource_t2bb4"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "敢"
+
+[sub_resource type="Resource" id="Resource_jfnxs"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "敢于"
+
+[sub_resource type="Resource" id="Resource_uggb1"]
+script = ExtResource("2_p34mh")
+English = "dare"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_t2bb4"), SubResource("Resource_jfnxs")])
+
+[sub_resource type="Resource" id="Resource_5jebx"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "继续"
+
+[sub_resource type="Resource" id="Resource_vm6ek"]
+script = ExtResource("2_p34mh")
+English = "carry on"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_5jebx")])
+
+[sub_resource type="Resource" id="Resource_wkoch"]
+script = ExtResource("3_hnxii")
+meaning = "回报"
+
+[sub_resource type="Resource" id="Resource_4qhke"]
+script = ExtResource("3_hnxii")
+meaning = "奖励"
+
+[sub_resource type="Resource" id="Resource_fqq4t"]
+script = ExtResource("2_p34mh")
+English = "reward"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_wkoch"), SubResource("Resource_4qhke")])
+
+[sub_resource type="Resource" id="Resource_hntoc"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "忽视"
+
+[sub_resource type="Resource" id="Resource_iurej"]
+script = ExtResource("2_p34mh")
+English = "ignore"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_hntoc")])
+
+[sub_resource type="Resource" id="Resource_l0bxi"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "乐观的"
+
+[sub_resource type="Resource" id="Resource_nj5se"]
+script = ExtResource("2_p34mh")
+English = "optimistic"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_l0bxi")])
+
+[sub_resource type="Resource" id="Resource_64yj8"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "事实上"
+
+[sub_resource type="Resource" id="Resource_vyboy"]
+script = ExtResource("2_p34mh")
+English = "in reality"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_64yj8")])
+
+[sub_resource type="Resource" id="Resource_p7v3p"]
+script = ExtResource("3_hnxii")
+meaning = "个人"
+
+[sub_resource type="Resource" id="Resource_7pyvq"]
+script = ExtResource("3_hnxii")
+meaning = "个体"
+
+[sub_resource type="Resource" id="Resource_arfax"]
+script = ExtResource("2_p34mh")
+English = "individual"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_p7v3p"), SubResource("Resource_7pyvq")])
+
+[sub_resource type="Resource" id="Resource_21nko"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "持续的"
+
+[sub_resource type="Resource" id="Resource_yetvl"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "不断的"
+
+[sub_resource type="Resource" id="Resource_njwef"]
+script = ExtResource("2_p34mh")
+English = "constant"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_21nko"), SubResource("Resource_yetvl")])
+
+[sub_resource type="Resource" id="Resource_o4qsd"]
+script = ExtResource("3_hnxii")
+meaning = "小河"
+
+[sub_resource type="Resource" id="Resource_1hjmd"]
+script = ExtResource("3_hnxii")
+meaning = "小溪"
+
+[sub_resource type="Resource" id="Resource_josmt"]
+script = ExtResource("3_hnxii")
+meaning = "流"
+
+[sub_resource type="Resource" id="Resource_yc5pi"]
+script = ExtResource("2_p34mh")
+English = "stream"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_o4qsd"), SubResource("Resource_1hjmd"), SubResource("Resource_josmt")])
+
+[sub_resource type="Resource" id="Resource_w1scj"]
+script = ExtResource("3_hnxii")
+meaning = "现象（复数）"
+
+[sub_resource type="Resource" id="Resource_lsjmt"]
+script = ExtResource("2_p34mh")
+English = "phenomena"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_w1scj")])
+
+[sub_resource type="Resource" id="Resource_tor6r"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "外部因素"
+
+[sub_resource type="Resource" id="Resource_ouu8t"]
+script = ExtResource("2_p34mh")
+English = "external factors"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_tor6r")])
+
+[sub_resource type="Resource" id="Resource_pea0t"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "表明"
+
+[sub_resource type="Resource" id="Resource_801pf"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "展示"
+
+[sub_resource type="Resource" id="Resource_nr6ns"]
+script = ExtResource("2_p34mh")
+English = "demonstrate"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_pea0t"), SubResource("Resource_801pf")])
+
+[sub_resource type="Resource" id="Resource_g4res"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "寿命"
+
+[sub_resource type="Resource" id="Resource_6p336"]
+script = ExtResource("2_p34mh")
+English = "life span"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_g4res")])
+
+[sub_resource type="Resource" id="Resource_6ic7l"]
+script = ExtResource("3_hnxii")
+meaning = "率"
+
+[sub_resource type="Resource" id="Resource_j2jey"]
+script = ExtResource("3_hnxii")
+meaning = "比率"
+
+[sub_resource type="Resource" id="Resource_5epwl"]
+script = ExtResource("2_p34mh")
+English = "rate"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_6ic7l"), SubResource("Resource_j2jey")])
+
+[sub_resource type="Resource" id="Resource_eptc0"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "促成"
+
+[sub_resource type="Resource" id="Resource_0g77g"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "造成"
+
+[sub_resource type="Resource" id="Resource_a85kf"]
+script = ExtResource("2_p34mh")
+English = "contribute to"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_eptc0"), SubResource("Resource_0g77g")])
+
+[sub_resource type="Resource" id="Resource_rpyr3"]
+script = ExtResource("3_hnxii")
+meaning = "困难"
+
+[sub_resource type="Resource" id="Resource_it2wi"]
+script = ExtResource("2_p34mh")
+English = "hardship"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_rpyr3")])
+
+[sub_resource type="Resource" id="Resource_mtgo1"]
+script = ExtResource("3_hnxii")
+meaning = "危机"
+
+[sub_resource type="Resource" id="Resource_0pjvv"]
+script = ExtResource("2_p34mh")
+English = "crisis"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_mtgo1")])
+
+[sub_resource type="Resource" id="Resource_733ur"]
+script = ExtResource("3_hnxii")
+meaning = "缓冲"
+
+[sub_resource type="Resource" id="Resource_lypqi"]
+script = ExtResource("2_p34mh")
+English = "buffer"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_733ur")])
+
+[sub_resource type="Resource" id="Resource_px3vj"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "适应力强的"
+
+[sub_resource type="Resource" id="Resource_t664g"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "耐挫力强的"
+
+[sub_resource type="Resource" id="Resource_dijjl"]
+script = ExtResource("2_p34mh")
+English = "resilient"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_px3vj"), SubResource("Resource_t664g")])
+
+[sub_resource type="Resource" id="Resource_owute"]
+script = ExtResource("3_hnxii")
+meaning = "悲观主义者"
+
+[sub_resource type="Resource" id="Resource_pln38"]
+script = ExtResource("2_p34mh")
+English = "pessimist"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_owute")])
+
+[sub_resource type="Resource" id="Resource_vxqpj"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "理解"
+
+[sub_resource type="Resource" id="Resource_e0i30"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "察觉"
+
+[sub_resource type="Resource" id="Resource_xksxl"]
+script = ExtResource("2_p34mh")
+English = "perceive"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_vxqpj"), SubResource("Resource_e0i30")])
+
+[sub_resource type="Resource" id="Resource_jaeq1"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "无知的"
+
+[sub_resource type="Resource" id="Resource_xk11s"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "愚昧的"
+
+[sub_resource type="Resource" id="Resource_5ad6p"]
+script = ExtResource("2_p34mh")
+English = "ignorant"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_jaeq1"), SubResource("Resource_xk11s")])
+
+[sub_resource type="Resource" id="Resource_hjup1"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "引起"
+
+[sub_resource type="Resource" id="Resource_k81co"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "导致"
+
+[sub_resource type="Resource" id="Resource_5xtam"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "造成"
+
+[sub_resource type="Resource" id="Resource_o24ul"]
+script = ExtResource("2_p34mh")
+English = "bring about"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_hjup1"), SubResource("Resource_k81co"), SubResource("Resource_5xtam")])
+
+[sub_resource type="Resource" id="Resource_rd0ye"]
+script = ExtResource("3_hnxii")
+type = 4
+meaning = "头脑清醒的"
+
+[sub_resource type="Resource" id="Resource_so3db"]
+script = ExtResource("2_p34mh")
+English = "clear-headed"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_rd0ye")])
+
+[sub_resource type="Resource" id="Resource_8c0e3"]
+script = ExtResource("3_hnxii")
+meaning = "因素"
+
+[sub_resource type="Resource" id="Resource_1vmk0"]
+script = ExtResource("2_p34mh")
+English = "factor"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_8c0e3")])
+
+[sub_resource type="Resource" id="Resource_ul73s"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "起作用"
+
+[sub_resource type="Resource" id="Resource_i1eud"]
+script = ExtResource("3_hnxii")
+type = 7
+meaning = "有意义"
+
+[sub_resource type="Resource" id="Resource_3n34i"]
+script = ExtResource("2_p34mh")
+English = "make a difference"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_ul73s"), SubResource("Resource_i1eud")])
+
+[sub_resource type="Resource" id="Resource_u8c01"]
+script = ExtResource("3_hnxii")
+meaning = "幸福"
+
+[sub_resource type="Resource" id="Resource_0ecid"]
+script = ExtResource("3_hnxii")
+meaning = "安康"
+
+[sub_resource type="Resource" id="Resource_1qq60"]
+script = ExtResource("2_p34mh")
+English = "well-being"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_u8c01"), SubResource("Resource_0ecid")])
+
+[sub_resource type="Resource" id="Resource_d71nn"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "决定"
+
+[sub_resource type="Resource" id="Resource_rrqy3"]
+script = ExtResource("2_p34mh")
+English = "determine"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_d71nn")])
+
+[sub_resource type="Resource" id="Resource_uafdk"]
+script = ExtResource("3_hnxii")
+meaning = "基因"
+
+[sub_resource type="Resource" id="Resource_1cggy"]
+script = ExtResource("2_p34mh")
+English = "gene"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_uafdk")])
+
+[sub_resource type="Resource" id="Resource_tgix3"]
+script = ExtResource("3_hnxii")
+meaning = "财富"
+
+[sub_resource type="Resource" id="Resource_8uogt"]
+script = ExtResource("2_p34mh")
+English = "wealth"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_tgix3")])
+
+[sub_resource type="Resource" id="Resource_1a2jq"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "负担得起"
+
+[sub_resource type="Resource" id="Resource_6m4dr"]
+script = ExtResource("2_p34mh")
+English = "afford"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_1a2jq")])
+
+[sub_resource type="Resource" id="Resource_ok318"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "喂"
+
+[sub_resource type="Resource" id="Resource_gtpri"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "养活"
+
+[sub_resource type="Resource" id="Resource_21j2v"]
+script = ExtResource("2_p34mh")
+English = "feed"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_ok318"), SubResource("Resource_gtpri")])
+
+[sub_resource type="Resource" id="Resource_4cyo6"]
+script = ExtResource("3_hnxii")
+type = 1
+meaning = "穿衣"
+
+[sub_resource type="Resource" id="Resource_hpq6w"]
+script = ExtResource("2_p34mh")
+English = "clothe"
+English_meaning_group = Array[ExtResource("3_hnxii")]([SubResource("Resource_4cyo6")])
+
+[resource]
+script = ExtResource("1_3q2t2")
+word_group = Array[ExtResource("2_p34mh")]([SubResource("Resource_qqmpq"), SubResource("Resource_3iwl7"), SubResource("Resource_d6f3e"), SubResource("Resource_rgjiu"), SubResource("Resource_2hfbq"), SubResource("Resource_07u85"), SubResource("Resource_otdy6"), SubResource("Resource_olnmk"), SubResource("Resource_4etn4"), SubResource("Resource_nu5p5"), SubResource("Resource_nqgbl"), SubResource("Resource_rjb34"), SubResource("Resource_4cspv"), SubResource("Resource_uggb1"), SubResource("Resource_vm6ek"), SubResource("Resource_fqq4t"), SubResource("Resource_iurej"), SubResource("Resource_nj5se"), SubResource("Resource_vyboy"), SubResource("Resource_arfax"), SubResource("Resource_njwef"), SubResource("Resource_yc5pi"), SubResource("Resource_lsjmt"), SubResource("Resource_ouu8t"), SubResource("Resource_nr6ns"), SubResource("Resource_6p336"), SubResource("Resource_5epwl"), SubResource("Resource_a85kf"), SubResource("Resource_it2wi"), SubResource("Resource_0pjvv"), SubResource("Resource_lypqi"), SubResource("Resource_dijjl"), SubResource("Resource_pln38"), SubResource("Resource_xksxl"), SubResource("Resource_5ad6p"), SubResource("Resource_o24ul"), SubResource("Resource_so3db"), SubResource("Resource_1vmk0"), SubResource("Resource_3n34i"), SubResource("Resource_1qq60"), SubResource("Resource_rrqy3"), SubResource("Resource_1cggy"), SubResource("Resource_8uogt"), SubResource("Resource_6m4dr"), SubResource("Resource_21j2v"), SubResource("Resource_hpq6w")])

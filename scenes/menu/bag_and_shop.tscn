@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://bb1hnyi12415k"]
+
+[ext_resource type="Script" uid="uid://nep6hr4bgjof" path="res://scenes/menu/bag_and_shop.gd" id="1_oxasc"]
+[ext_resource type="Script" uid="uid://boso63v5wp2au" path="res://script/item/item.gd" id="2_3emcy"]
+[ext_resource type="Resource" uid="uid://brn5ksrg5k6ns" path="res://assets/items/name_change_card.tres" id="2_oxasc"]
+
+[node name="bag_and_shop" type="Control" unique_id=1831376503 node_paths=PackedStringArray("appear_button", "bag_area", "shop_area", "bag_area_item_name", "bag_area_item_des", "shop_area_item_name", "shop_area_item_des", "shop_buttons", "shop_cost", "warning_window", "score")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_right = 1152.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oxasc")
+appear_button = NodePath("Button")
+bag_area = NodePath("PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/ScrollContainer/bag_area")
+shop_area = NodePath("PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/ScrollContainer/shop_area")
+bag_area_item_name = NodePath("PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/VBoxContainer/name")
+bag_area_item_des = NodePath("PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/VBoxContainer/description")
+shop_area_item_name = NodePath("PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer/name")
+shop_area_item_des = NodePath("PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer/description")
+shop_buttons = NodePath("PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer/HBoxContainer")
+shop_cost = NodePath("PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer/HBoxContainer/Label")
+warning_window = NodePath("AcceptDialog")
+score = NodePath("PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/HBoxContainer/score")
+selling_item = Array[ExtResource("2_3emcy")]([ExtResource("2_oxasc")])
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1517280042]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1061323856]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer" unique_id=1265933167]
+layout_mode = 2
+theme_override_constants/autohide = 0
+
+[node name="bag_area_whole" type="VBoxContainer" parent="PanelContainer/MarginContainer/HSplitContainer" unique_id=2035189688]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole" unique_id=812577543]
+layout_mode = 2
+
+[node name="你的背包" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/HBoxContainer" unique_id=2092046493]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "你的背包"
+
+[node name="score" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/HBoxContainer" unique_id=163324355]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "积分："
+horizontal_alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole" unique_id=1809561495]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="bag_area" type="HFlowContainer" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/ScrollContainer" unique_id=760065625]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole" unique_id=1438762048]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="name" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/VBoxContainer" unique_id=1633680292]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "物品名称"
+
+[node name="description" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/bag_area_whole/VBoxContainer" unique_id=331483500]
+layout_mode = 2
+size_flags_vertical = 3
+text = "物品描述"
+
+[node name="shop_area_whole" type="VBoxContainer" parent="PanelContainer/MarginContainer/HSplitContainer" unique_id=2140743614]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="shop" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole" unique_id=1357038264]
+layout_mode = 2
+text = "商店"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole" unique_id=1601915119]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="shop_area" type="HFlowContainer" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/ScrollContainer" unique_id=550620321]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole" unique_id=2023242867]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="name" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer" unique_id=659539665]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "物品名称"
+
+[node name="description" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer" unique_id=1256602879]
+layout_mode = 2
+size_flags_vertical = 3
+text = "物品描述"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer" unique_id=1357580979]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer/HBoxContainer" unique_id=1234050609]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "价格："
+
+[node name="buy" type="Button" parent="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer/HBoxContainer" unique_id=1669161836]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "购买！"
+
+[node name="Button" type="Button" parent="." unique_id=947856245]
+custom_minimum_size = Vector2(50, 200)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1192.0
+offset_top = -100.0
+offset_right = -1142.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+toggle_mode = true
+text = "背
+包"
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=365951299]
+title = "警告！"
+initial_position = 1
+size = Vector2i(160, 100)
+dialog_text = "你没有足够的积分！"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HSplitContainer/shop_area_whole/VBoxContainer/HBoxContainer/buy" to="." method="_on_buy_pressed"]
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

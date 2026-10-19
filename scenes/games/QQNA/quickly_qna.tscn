@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dgoktty65bhgk"]
+
+[ext_resource type="Script" uid="uid://by6eled4qjbc0" path="res://scenes/games/QQNA/QQNA.gd" id="1_7w4ad"]
+
+[node name="quickly_QnA" type="Control" unique_id=1075083561 node_paths=PackedStringArray("English", "button_area")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7w4ad")
+English = NodePath("VBoxContainer/Container/Label")
+button_area = NodePath("VBoxContainer/CenterContainer/HBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=705204136]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1888218954]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Container" type="CenterContainer" parent="VBoxContainer" unique_id=1339059865]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Container" unique_id=839279590]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "qwerewq"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1132687280]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer" unique_id=826765474]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Control2" type="Control" parent="VBoxContainer" unique_id=2077283185]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2

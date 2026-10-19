@@ -1,0 +1,5 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+# 联机测试的截图和日志产物
+tests/out/

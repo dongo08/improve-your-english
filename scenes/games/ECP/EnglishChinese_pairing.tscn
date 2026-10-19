@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://qnl54bpy2fq7"]
+
+[ext_resource type="Script" uid="uid://dc1dxh42noyye" path="res://scenes/games/ECP/english_chinese_pairing.gd" id="1_ekoj4"]
+
+[node name="Control" type="Control" unique_id=43856498 node_paths=PackedStringArray("english_area", "chinese_area")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_ekoj4")
+english_area = NodePath("CenterContainer/PanelContainer/HSplitContainer/GridContainer")
+chinese_area = NodePath("CenterContainer/PanelContainer/HSplitContainer/GridContainer2")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=614397285]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1793841191]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CenterContainer/PanelContainer" unique_id=1309746015]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/HSplitContainer" unique_id=345529936]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 5
+
+[node name="GridContainer2" type="GridContainer" parent="CenterContainer/PanelContainer/HSplitContainer" unique_id=705688647]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 5

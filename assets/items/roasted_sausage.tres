@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ActiveItem" load_steps=3 format=3 uid="uid://chfuqrviqyh1u"]
+
+[ext_resource type="Texture2D" uid="uid://dknorodyu5pbv" path="res://assets/sprite/roasted-sausage.png" id="1_q3ism"]
+[ext_resource type="Script" uid="uid://cgd7wuc5pdvvq" path="res://script/item/active_item.gd" id="2_q3ism"]
+
+[resource]
+script = ExtResource("2_q3ism")
+using_count = 0
+name = "烤肠"
+count = 1
+icon = ExtResource("1_q3ism")
+description = "学校卖的烤肠，受人喜欢
+目前还不能使用"
+cost = 350
+metadata/_custom_type_script = "uid://boso63v5wp2au"

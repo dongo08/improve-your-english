@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://bhfpeuxyt7lvs"]
+
+[ext_resource type="Script" uid="uid://boa2bng1a33is" path="res://scenes/games/answer_area.gd" id="1_2rs15"]
+[ext_resource type="Script" uid="uid://rr4clo5cookt" path="res://scenes/games/camera_2d.gd" id="2_7pq3e"]
+[ext_resource type="AudioStream" uid="uid://cpxwtx1pagmbm" path="res://assets/sounds/bgm/untitled.ogg" id="3_txb83"]
+[ext_resource type="AudioStream" uid="uid://b5jn3eu0sebfo" path="res://assets/sounds/bgm/Project_14.ogg" id="4_710nd"]
+[ext_resource type="AudioStream" uid="uid://dtqydnn80a5kb" path="res://assets/sounds/bgm/toj.ogg" id="5_6v802"]
+[ext_resource type="AudioStream" uid="uid://bjpxo7j2gu6oy" path="res://assets/sounds/bgm/travelb.ogg" id="6_hipjf"]
+[ext_resource type="AudioStream" uid="uid://c5yeo0xbr2ab" path="res://assets/sounds/bgm/mi.ogg" id="7_k24ff"]
+[ext_resource type="AudioStream" uid="uid://ipigonn2iobn" path="res://assets/sounds/bgm/IW.ogg" id="8_mntjh"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jhih5"]
+playback_mode = 1
+streams_count = 6
+stream_0/stream = ExtResource("3_txb83")
+stream_1/stream = ExtResource("4_710nd")
+stream_2/stream = ExtResource("5_6v802")
+stream_3/stream = ExtResource("6_hipjf")
+stream_4/stream = ExtResource("7_k24ff")
+stream_5/stream = ExtResource("8_mntjh")
+
+[node name="Control" type="Control" unique_id=1863546779 node_paths=PackedStringArray("time_label", "score_label", "timer", "audio", "end_window", "black", "label2", "camera", "last_words_list")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_2rs15")
+time_label = NodePath("Label")
+score_label = NodePath("Label2")
+timer = NodePath("Timer")
+audio = NodePath("AudioStreamPlayer")
+end_window = NodePath("PanelContainer")
+black = NodePath("ColorRect")
+label2 = NodePath("ColorRect/CenterContainer/Label")
+camera = NodePath("Camera2D")
+last_words_list = NodePath("PanelContainer/BoxContainer/ItemList")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=922744470]
+position = Vector2(576, 324)
+script = ExtResource("2_7pq3e")
+
+[node name="Timer" type="Timer" parent="." unique_id=34888290]
+wait_time = 60.0
+one_shot = true
+
+[node name="Label" type="Label" parent="." unique_id=365015852]
+layout_mode = 1
+offset_left = 381.0
+offset_top = 20.0
+offset_right = 621.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 48
+text = "剩余时间："
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=287763477]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="PanelContainer" unique_id=1754023890]
+layout_mode = 2
+alignment = 1
+vertical = true
+
+[node name="Label" type="Label" parent="PanelContainer/BoxContainer" unique_id=908482169]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "时间到"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="PanelContainer/BoxContainer" unique_id=612596242]
+layout_mode = 2
+size_flags_vertical = 3
+max_columns = 2
+same_column_width = true
+fixed_column_width = 576
+
+[node name="confirm" type="Button" parent="PanelContainer/BoxContainer" unique_id=2103481910]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "返回"
+
+[node name="Control" type="Control" parent="PanelContainer/BoxContainer" unique_id=1942989365]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Label2" type="Label" parent="." unique_id=1931953543]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 549.0
+offset_right = 626.0
+offset_bottom = 637.0
+theme_override_font_sizes/font_size = 64
+text = "得分"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=72544177]
+stream = SubResource("AudioStreamRandomizer_jhih5")
+volume_db = -12.0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1064847561]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect" unique_id=275296558]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer" unique_id=84293849]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "3"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="PanelContainer/BoxContainer/confirm" to="." method="_on_confirm_pressed"]

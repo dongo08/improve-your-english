@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://brn5ksrg5k6ns"]
+
+[ext_resource type="Script" uid="uid://boso63v5wp2au" path="res://script/item/item.gd" id="1_0f1hb"]
+[ext_resource type="Texture2D" uid="uid://8ue8qt141x22" path="res://assets/sprite/card-Sheet.png" id="1_3k6uo"]
+
+[resource]
+script = ExtResource("1_0f1hb")
+name = "改名卡"
+count = 1
+icon = ExtResource("1_3k6uo")
+description = "可以改变你的名字，在改名时自动消耗"
+cost = 200
+metadata/_custom_type_script = "uid://boso63v5wp2au"
