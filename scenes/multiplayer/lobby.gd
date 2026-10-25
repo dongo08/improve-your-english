@@ -20,6 +20,7 @@ var player_list: ItemList
 var players_title: Label
 var status_label: Label
 var address_label: Label
+var settings: GameSettings
 
 
 func _ready() -> void:
@@ -30,6 +31,9 @@ func _ready() -> void:
 	NetworkManager.match_started.connect(_on_match_started)
 
 	name_edit.text = NetworkManager.my_name if NetworkManager.my_name != "" else _default_name()
+	settings = preload("res://scenes/menu/game_settings.tscn").instantiate()
+	settings.started.connect(_on_settings_started)
+	add_child(settings)
 	_refresh_state()
 	_refresh_players()
 
@@ -339,7 +343,15 @@ func _on_leave_pressed() -> void:
 
 
 func _on_start_pressed() -> void:
-	NetworkManager.start_match(mode_option.selected)
+	# 英汉配对先让房主选难度，其它玩法没有可选项直接开始
+	if mode_option.selected == Global.GameType.ECP:
+		settings.open(mode_option.selected)
+		return
+	NetworkManager.start_match(mode_option.selected, Global.ecp_level)
+
+
+func _on_settings_started(game_type: int) -> void:
+	NetworkManager.start_match(game_type, Global.ecp_level)
 
 
 func _on_back_pressed() -> void:

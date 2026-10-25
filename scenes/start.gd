@@ -25,6 +25,10 @@ func _on_accept_pressed() -> void:
 		get_tree().change_scene_to_file("res://scenes/choose_scene.tscn")
 
 
+func _on_online_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/online/login.tscn")
+
+
 func _on_cancel_pressed() -> void:
 	input_window.visible=false
 	input_line.text=""

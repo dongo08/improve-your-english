@@ -73,11 +73,14 @@ func refresh():
 
 func _on_buy_pressed() -> void:
 	if AccountManager.current_account.score>=shop_focus.item.cost:
-		var a= AccountManager.current_account.bag.find(shop_focus.item)
+		# 存档里的道具是从资源复制出来的，不能按对象身份找，按资源路径找
+		var a= AccountManager.current_account.find_bag_item(shop_focus.item)
 		if a!=-1:
 			AccountManager.current_account.bag[a].count+=1
 		else:
-			AccountManager.current_account.bag.push_back(shop_focus.item)
+			var item:Item=shop_focus.item.duplicate()
+			item.count=1
+			AccountManager.current_account.bag.push_back(item)
 			refresh()
 		AccountManager.current_account.score-=shop_focus.item.cost
 		AccountManager.save()

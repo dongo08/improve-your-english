@@ -25,6 +25,7 @@ Global="*res://script/global/global.gd"
 DateHelper="*res://script/global/date_helper.gd"
 AccountManager="*res://script/global/account_manager.gd"
 NetworkManager="*res://script/global/network_manager.gd"
+Online="*res://script/online/online_client.gd"
 
 [display]
 

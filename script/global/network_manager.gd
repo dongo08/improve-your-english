@@ -20,6 +20,8 @@ var is_host: bool = false
 var in_match: bool = false
 var match_game_type: int = 0
 var match_duration: float = DEFAULT_DURATION
+## 本局玩法设置（由房主决定并同步给所有人）
+var match_level: int = Word.Level.PRIMARY
 var last_error: String = ""
 var connecting: bool = false
 
@@ -206,7 +208,7 @@ func _broadcast() -> void:
 # ---------------------------------------------------------------- 比赛
 
 
-func start_match(game_type: int, duration: float = DEFAULT_DURATION) -> void:
+func start_match(game_type: int, level: int = Word.Level.PRIMARY, duration: float = DEFAULT_DURATION) -> void:
 	if !is_online or !is_host:
 		return
 	if players.is_empty():
@@ -217,15 +219,16 @@ func start_match(game_type: int, duration: float = DEFAULT_DURATION) -> void:
 		players[id]["score"] = 0
 		players[id]["finished"] = false
 	_broadcast()
-	_begin_match.rpc(game_type, duration)
-	_begin_match(game_type, duration)
+	_begin_match.rpc(game_type, duration, level)
+	_begin_match(game_type, duration, level)
 
 
 @rpc("authority", "call_remote", "reliable")
-func _begin_match(game_type: int, duration: float) -> void:
+func _begin_match(game_type: int, duration: float, level: int) -> void:
 	in_match = true
 	match_game_type = game_type
 	match_duration = duration
+	match_level = level
 	players_changed.emit()
 	match_started.emit(game_type, duration)
 

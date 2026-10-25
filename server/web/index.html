@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>improve your English · 服务端面板</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1e222b;
+    --line: #2a2f3a;
+    --text: #e7e9ee;
+    --muted: #98a0ae;
+    --accent: #6ea8fe;
+    --good: #55d187;
+    --bad: #f07474;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.6 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px 20px 40px; }
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+  h1 { margin: 0; font-size: 26px; letter-spacing: .02em; }
+  .sub { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+  .right { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+  .dot.ok { background: var(--good); box-shadow: 0 0 8px rgba(85, 209, 135, .7); }
+  .dot.bad { background: var(--bad); }
+  button {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--line);
+    border-radius: 8px; padding: 5px 12px; font-size: 13px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 16px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .card span { color: var(--muted); font-size: 12px; }
+  .card strong { font-size: 24px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: 5fr 7fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; min-width: 0;
+  }
+  .panel h2 { margin: 0 0 12px; font-size: 15px; font-weight: 600; }
+  .panel h2 small { color: var(--muted); font-weight: 400; margin-left: 6px; font-size: 12px; }
+  .top { list-style: none; margin: 0; padding: 0; }
+  .top li {
+    display: flex; align-items: center; gap: 10px; padding: 7px 0;
+    border-bottom: 1px dashed var(--line); font-size: 14px;
+  }
+  .top li:last-child { border-bottom: 0; }
+  .top .rank { width: 22px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .top li:nth-child(1) .rank { color: #ffd76e; }
+  .top .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .top .pp { color: var(--accent); font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: var(--panel-2); }
+  tbody tr.active { background: rgba(110, 168, 254, .12); }
+  td.num { font-variant-numeric: tabular-nums; }
+  .empty { color: var(--muted); padding: 12px 0; }
+  .detail-head { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 10px; color: var(--muted); font-size: 13px; }
+  .detail-head b { color: var(--text); font-weight: 600; }
+  footer { margin-top: 18px; color: var(--muted); font-size: 12px; text-align: center; }
+  #detail-title { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>improve your English</h1>
+      <p class="sub">账号服务端 · 只读面板</p>
+    </div>
+    <div class="right">
+      <span class="dot" id="dot"></span>
+      <span id="status">连接中…</span>
+      <button id="refresh" type="button">刷新</button>
+    </div>
+  </header>
+
+  <section class="cards">
+    <div class="card"><span>账号</span><strong id="stat-accounts">–</strong></div>
+    <div class="card"><span>游玩场次</span><strong id="stat-plays">–</strong></div>
+    <div class="card"><span>在线连接</span><strong id="stat-online">–</strong></div>
+    <div class="card"><span>运行时长</span><strong id="stat-uptime">–</strong></div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <h2>排行榜<small>按总 pp</small></h2>
+      <ol class="top" id="top"></ol>
+    </div>
+    <div class="panel">
+      <h2>账号<small>点一行查看详情</small></h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>账号</th><th>pp</th><th>积分</th><th>场次</th><th>最后游玩</th></tr>
+          </thead>
+          <tbody id="account-rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="detail" hidden>
+    <h2 id="detail-title">账号详情</h2>
+    <div class="detail-head" id="detail-head"></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>时间</th><th>模式</th><th>难度</th><th>pp</th><th>得分</th><th>正确 / 错误</th><th>时长</th></tr>
+        </thead>
+        <tbody id="play-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>每 5 秒自动刷新 · 数据来自服务端存档 · <span id="meta"></span></footer>
+</div>
+
+<script>
+const GAME_NAMES = ['英汉配对', '快问快答', '快速拼写'];
+const LEVEL_NAMES = ['初级', '中级', '高级'];
+
+const state = { selected: null };
+
+// 支持 #account=名字 直接打开某个账号，方便收藏 / 分享
+const hashMatch = location.hash.match(/^#account=(.+)$/);
+if (hashMatch) state.selected = decodeURIComponent(hashMatch[1]);
+
+const $ = (id) => document.getElementById(id);
+
+function setStatus(ok, text) {
+  const dot = $('dot');
+  dot.className = 'dot ' + (ok ? 'ok' : 'bad');
+  $('status').textContent = text;
+}
+
+function fmtNumber(value) {
+  return Number(value || 0).toLocaleString('zh-CN');
+}
+
+function fmtTime(unix) {
+  if (!unix) return '—';
+  return new Date(unix * 1000).toLocaleString('zh-CN', { hour12: false });
+}
+
+function fmtDuration(seconds) {
+  const total = Math.max(0, Math.floor(seconds || 0));
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  if (h > 0) return h + ' 小时 ' + m + ' 分';
+  if (m > 0) return m + ' 分 ' + s + ' 秒';
+  return s + ' 秒';
+}
+
+function cell(row, text, className) {
+  const td = document.createElement('td');
+  td.textContent = text;
+  if (className) td.className = className;
+  row.appendChild(td);
+  return td;
+}
+
+async function getJSON(url) {
+  const response = await fetch(url, { cache: 'no-store' });
+  if (!response.ok) throw new Error('HTTP ' + response.status);
+  return response.json();
+}
+
+function renderSummary(data) {
+  $('stat-accounts').textContent = fmtNumber(data.account_count);
+  $('stat-plays').textContent = fmtNumber(data.play_count);
+  $('stat-online').textContent = fmtNumber(data.online_clients);
+  $('stat-uptime').textContent = fmtDuration(data.uptime_sec);
+
+  const top = $('top');
+  top.textContent = '';
+  if (!data.top || data.top.length === 0) {
+    const empty = document.createElement('li');
+    empty.className = 'empty';
+    empty.textContent = '还没有账号';
+    top.appendChild(empty);
+  } else {
+    data.top.forEach((player, index) => {
+      const item = document.createElement('li');
+      const rank = document.createElement('span');
+      rank.className = 'rank';
+      rank.textContent = String(index + 1);
+      const name = document.createElement('span');
+      name.className = 'name';
+      name.textContent = player.name;
+      const pp = document.createElement('span');
+      pp.className = 'pp';
+      pp.textContent = Number(player.pp || 0).toFixed(1) + ' pp';
+      item.append(rank, name, pp);
+      top.appendChild(item);
+    });
+  }
+
+  $('meta').textContent =
+    '服务端端口 ' + data.tcp_port + ' · 面板端口 ' + data.web_port +
+    ' · 启动于 ' + fmtTime(data.started_unix);
+}
+
+function renderAccounts(accounts) {
+  const body = $('account-rows');
+  body.textContent = '';
+  if (accounts.length === 0) {
+    const row = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 5;
+    td.className = 'empty';
+    td.textContent = '还没有账号';
+    row.appendChild(td);
+    body.appendChild(row);
+    return;
+  }
+  accounts.forEach((account) => {
+    const row = document.createElement('tr');
+    if (account.name === state.selected) row.className = 'active';
+    cell(row, account.name);
+    cell(row, Number(account.pp || 0).toFixed(1), 'num');
+    cell(row, fmtNumber(account.score), 'num');
+    cell(row, fmtNumber(account.plays), 'num');
+    cell(row, fmtTime(account.last_unix));
+    row.addEventListener('click', () => showAccount(account.name, true));
+    body.appendChild(row);
+  });
+}
+
+async function showAccount(name, scroll) {
+  state.selected = name;
+  try {
+    const data = await getJSON('/api/account?name=' + encodeURIComponent(name));
+    if (!data.ok) throw new Error(data.error || '加载失败');
+    $('detail').hidden = false;
+    $('detail-title').textContent = '账号详情 · ' + data.name;
+
+    const head = $('detail-head');
+    head.textContent = '';
+    const parts = [
+      ['总 pp', Number(data.pp || 0).toFixed(1)],
+      ['积分', fmtNumber(data.score)],
+      ['游玩场次', fmtNumber(data.total_plays)],
+      ['创建于', fmtTime(data.created_unix)],
+    ];
+    parts.forEach(([label, value]) => {
+      const span = document.createElement('span');
+      const b = document.createElement('b');
+      b.textContent = value;
+      span.append(label + '：', b);
+      head.appendChild(span);
+    });
+
+    const body = $('play-rows');
+    body.textContent = '';
+    if (!data.plays || data.plays.length === 0) {
+      const row = document.createElement('tr');
+      const td = document.createElement('td');
+      td.colSpan = 7;
+      td.className = 'empty';
+      td.textContent = '还没有游玩记录';
+      row.appendChild(td);
+      body.appendChild(row);
+    } else {
+      data.plays.forEach((play) => {
+        const row = document.createElement('tr');
+        cell(row, fmtTime(play.unix));
+        cell(row, GAME_NAMES[play.game] || '—');
+        cell(row, play.level >= 0 ? (LEVEL_NAMES[play.level] || '—') : '—');
+        cell(row, Number(play.pp || 0).toFixed(2), 'num');
+        cell(row, fmtNumber(play.score), 'num');
+        cell(row, play.correct + ' / ' + play.wrong, 'num');
+        cell(row, Math.round(play.duration || 0) + ' 秒', 'num');
+        body.appendChild(row);
+      });
+    }
+    if (scroll) $('detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } catch (error) {
+    setStatus(false, '账号详情加载失败');
+  }
+}
+
+async function refresh() {
+  try {
+    const [summary, accounts] = await Promise.all([
+      getJSON('/api/summary'),
+      getJSON('/api/accounts'),
+    ]);
+    renderSummary(summary);
+    renderAccounts(accounts.accounts || []);
+    setStatus(true, '已连接 · 刚刚更新');
+    if (state.selected) await showAccount(state.selected, false);
+  } catch (error) {
+    setStatus(false, '无法连接服务端');
+  }
+}
+
+$('refresh').addEventListener('click', refresh);
+refresh();
+setInterval(refresh, 5000);
+</script>
+</body>
+</html>
