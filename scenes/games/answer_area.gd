@@ -25,6 +25,8 @@ var start_time := 0.0
 var multiplayer_mode := false
 var session_over := false
 var last_record: PlayRecord
+## 在线模式下成绩上传失败（重试也失败）时，在结算页提示一下
+var sync_failed := false
 
 var scoreboard: MpScoreboard
 var summary_box: VBoxContainer
@@ -42,12 +44,15 @@ func _ready() -> void:
 		Global.ecp_level = NetworkManager.match_level
 		timer.wait_time = NetworkManager.match_duration
 	else:
-		var cost = Global.GAME_STAMINA_COST.get(Global.answer_area_type, 5)
+		var cost = Global.GAME_STAMINA_COST.get(Global.answer_area_type, 50)
 		if !(AccountManager.current_account.get_stamina() > cost):
 			get_tree().change_scene_to_file("res://scenes/choose_scene.tscn")
 			return
 
 	_spawn_game()
+
+	if AccountManager.is_online:
+		Online.upload_finished.connect(_on_upload_finished)
 
 	if multiplayer_mode:
 		_add_scoreboard()
@@ -152,7 +157,7 @@ func _finish_session() -> void:
 	if multiplayer_mode:
 		NetworkManager.report_finished(score)
 	else:
-		AccountManager.current_account.consume_stamina(Global.GAME_STAMINA_COST[Global.answer_area_type])
+		AccountManager.current_account.consume_stamina(Global.GAME_STAMINA_COST.get(Global.answer_area_type, 50))
 	AccountManager.save()
 
 	var title: Label = end_window.get_node("BoxContainer/Label")
@@ -205,6 +210,8 @@ func _calculate_pp(stats: Dictionary) -> float:
 
 
 func _fill_last_words() -> void:
+	if answering_area == null:
+		return
 	var last_words: WordGroup = answering_area.get_last_words()
 	for word in last_words.word_group:
 		last_words_list.add_item(word.English + " " + word.meanings_text())
@@ -241,6 +248,17 @@ func _refresh_summary() -> void:
 		last_record.game_name(), level_text, last_record.score, last_record.pp,
 		last_record.correct, last_record.wrong, last_record.effective, denominator,
 	]
+	if sync_failed:
+		summary_label.text += "\n（成绩还没同步到服务器，稍后会自动重试）"
+
+
+func _on_upload_finished(ok: bool, _message: String) -> void:
+	if ok:
+		sync_failed = false
+		return
+	sync_failed = true
+	if session_over:
+		_refresh_summary()
 
 
 func _on_confirm_pressed() -> void:
@@ -328,9 +346,13 @@ func _on_network_error(message: String) -> void:
 	_finish_session()
 
 
-## 房主开了新一局（可能是我们还在结算界面时开的），直接重开这一场
+## 房主开了新一局。结算动画还在播的话先让它播完，别切得太生硬
 func _on_new_match(_game_type: int, _duration: float) -> void:
 	if !is_inside_tree():
 		return
+	if session_over:
+		await get_tree().create_timer(1.2).timeout
+		if !is_inside_tree():
+			return
 	if get_tree().current_scene == self:
 		get_tree().reload_current_scene()

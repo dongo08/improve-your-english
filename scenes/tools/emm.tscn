@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg3yv04ei0s2h"]
-
-[ext_resource type="Script" uid="uid://d1sq3clrpinqx" path="res://scenes/tools/english-many-meaning.gd" id="1_bsyrf"]
-[ext_resource type="Resource" uid="uid://bd0wce14jeqht" path="res://assets/U4_130-133.tres" id="2_ve5kc"]
-
-[node name="Node" type="Node"]
-script = ExtResource("1_bsyrf")
-word_group = ExtResource("2_ve5kc")

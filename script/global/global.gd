@@ -15,7 +15,7 @@ const GAME_STAMINA_COST = {
 ## 英汉配对棋盘上的词对数
 const ECP_PAIR_COUNT := 30
 
-var word_group: WordGroup = load("res://assets/wordbook.tres")
+var word_group: WordGroup = load("res://assets/wordbook.res")
 var answer_area_type: Global.GameType
 
 ## 本局设置：主界面选择，联机时由房主同步

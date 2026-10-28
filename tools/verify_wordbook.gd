@@ -2,9 +2,9 @@ extends Node
 ## 词库自检：godot --headless --path . res://tools/verify_wordbook.tscn
 
 func _ready() -> void:
-	var group: WordGroup = load("res://assets/wordbook.tres")
+	var group: WordGroup = load("res://assets/wordbook.res")
 	if group == null:
-		print("[verify] 读不到 wordbook.tres")
+		print("[verify] 读不到 wordbook.res")
 		get_tree().quit(1)
 		return
 

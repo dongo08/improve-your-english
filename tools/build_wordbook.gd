@@ -1,17 +1,21 @@
 extends Node
-## 把 assets/wordbook_source.json（xlsx 解析结果）合并进 assets/gaozhong.tres，
-## 生成 assets/wordbook.tres。
+## 把 assets/wordbook_source.json（xlsx 解析结果）合并进现有词库，
+## 生成二进制词库 assets/wordbook.res。
+##
+## 基础词库优先用上一次生成的 wordbook.res；没有的话退回旧的 gaozhong.tres。
+## 这样删掉旧源文件也能继续按新的 xlsx 重建。
 ##
 ## 规则：
 ##   - 同一个词（不分大小写、含括号别名）只保留一条，重复的只补新词义；
 ##   - 表格里的词按“初中 / * / **”设置初级 / 中级 / 高级；
-##   - 旧词库里表格没有的词统一算高级。
+##   - 词库里表格没有的词统一算高级。
 ##
 ## 跑法：godot --headless --path . res://tools/build_wordbook.tscn
 
-const SOURCE_TRES := "res://assets/gaozhong.tres"
+const OUTPUT_PATH := "res://assets/wordbook.res"
+const PREVIOUS_OUTPUT := "res://assets/wordbook.res"
+const LEGACY_SOURCE := "res://assets/gaozhong.tres"
 const SOURCE_JSON := "res://assets/wordbook_source.json"
-const OUTPUT_TRES := "res://assets/wordbook.tres"
 
 const LEVEL_BY_NAME := {
 	"PRIMARY": Word.Level.PRIMARY,
@@ -33,10 +37,12 @@ var added_meanings := 0
 
 
 func _ready() -> void:
-	var old_group: WordGroup = load(SOURCE_TRES)
+	var source := PREVIOUS_OUTPUT if FileAccess.file_exists(PREVIOUS_OUTPUT) else LEGACY_SOURCE
+	var old_group: WordGroup = load(source)
 	if old_group == null:
-		_fail("读不到 %s" % SOURCE_TRES)
+		_fail("读不到 %s" % source)
 		return
+	print("[wordbook] 基础词库：%s" % source)
 	_merge_old(old_group)
 
 	if !FileAccess.file_exists(SOURCE_JSON):
@@ -51,9 +57,9 @@ func _ready() -> void:
 
 	var group := WordGroup.new()
 	group.word_group = words
-	var err := ResourceSaver.save(group, OUTPUT_TRES)
+	var err := ResourceSaver.save(group, OUTPUT_PATH)
 	if err != OK:
-		_fail("保存失败：%s（错误码 %d）" % [OUTPUT_TRES, err])
+		_fail("保存失败：%s（错误码 %d）" % [OUTPUT_PATH, err])
 		return
 
 	_report(words)
@@ -205,7 +211,7 @@ func _report(words: Array[Word]) -> void:
 	])
 	if !empty_words.is_empty():
 		print("[wordbook] 警告：%d 个词没有词义，例如 %s" % [empty_words.size(), str(empty_words.slice(0, 5))])
-	print("[wordbook] 已写入 %s" % OUTPUT_TRES)
+	print("[wordbook] 已写入 %s" % OUTPUT_PATH)
 
 
 func _fail(message: String) -> void:

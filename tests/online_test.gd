@@ -87,4 +87,39 @@ func _run() -> void:
 	var players: Array = leaderboard.get("players", [])
 	_check(!players.is_empty() and players[0]["name"] == NAME, "排行榜里有当前账号")
 
+	# F1：伪造 pp / 积分上传，服务端必须按 correct/wrong 重算
+	var cheat := SingleAccount.new()
+	cheat.id = NAME
+	var cheat_play := PlayRecord.new()
+	cheat_play.game_type = Global.GameType.ECP
+	cheat_play.level = Word.Level.ADVANCED
+	cheat_play.correct = 30
+	cheat_play.wrong = 0
+	cheat_play.total = 30
+	cheat_play.effective = 30
+	cheat_play.pp = 999999.0
+	cheat_play.score = 999999
+	cheat.plays.append(cheat_play)
+
+	var forged := await Online.push_account(cheat)
+	_check(forged.get("ok", false), "上传伪造存档")
+	_check(is_equal_approx(float(forged.get("total_pp", 0.0)), 300.0), "服务端忽略客户端 pp，重算为 300（实际 %.1f）" % float(forged.get("total_pp", 0.0)))
+	_check(int(forged.get("total_score", 0)) == 150, "服务端忽略客户端积分，重算为 150（实际 %d）" % int(forged.get("total_score", 0)))
+
+	var forged_profile := await Online.fetch_profile()
+	var stored := SingleAccount.from_dict(forged_profile.get("account", {}))
+	_check(stored.plays.size() == 1 and is_equal_approx(stored.plays[0].pp, 300.0), "服务端存下来的单场 pp 也是 300")
+	_check(stored.plays.size() == 1 and stored.plays[0].score == 150, "服务端存下来的单场得分是 150")
+
+	# F4：连续密码错误会触发限流，限流期间正确密码也进不来
+	var rate_limited := false
+	for i in range(6):
+		var attempt := await Online.login(HOST, port, NAME, "definitely-wrong-%d" % i)
+		if str(attempt.get("error", "")).contains("过多"):
+			rate_limited = true
+			break
+	_check(rate_limited, "连续失败后触发登录限流")
+	var correct_after_block := await Online.login(HOST, port, NAME, PASSWORD)
+	_check(!correct_after_block.get("ok", false), "限流期间正确密码也被拒绝")
+
 	Online.close_connection()

@@ -10,6 +10,9 @@ const DEFAULT_PORT := 9000
 const MIN_PASSWORD_LENGTH := 4
 const CONNECT_TIMEOUT_MS := 8000
 const REQUEST_TIMEOUT_MS := 12000
+## 服务端 120 秒没收到数据会回收连接，这里定时 ping 一下保活
+const HEARTBEAT_SEC := 45.0
+const MAX_UPLOAD_RETRIES := 3
 
 var host := ""
 var port := DEFAULT_PORT
@@ -22,13 +25,29 @@ var _buffer := PackedByteArray()
 var _next_id := 0
 ## id -> {done: bool, response: Dictionary}
 var _pending: Dictionary = {}
+## 待上传的存档：[{"account": Dictionary, "attempts": int}]
 var _upload_queue: Array = []
 var _uploading := false
+var _retry_at_ms := 0
+var _heartbeat_accum := 0.0
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	_poll()
 	_pump_uploads()
+	_heartbeat(delta)
+
+
+func _heartbeat(delta: float) -> void:
+	if !connected:
+		_heartbeat_accum = 0.0
+		return
+	_heartbeat_accum += delta
+	if _heartbeat_accum < HEARTBEAT_SEC:
+		return
+	_heartbeat_accum = 0.0
+	_next_id += 1
+	_peer.put_data((JSON.stringify({"op": "ping", "id": _next_id}) + "\n").to_utf8_buffer())
 
 
 func is_logged_in() -> bool:
@@ -83,6 +102,10 @@ func close_connection() -> void:
 		box.response = {"ok": false, "error": "连接已断开"}
 		box.done = true
 	_pending.clear()
+	# 换账号/断开后不能把上一个账号的存档发出去
+	_upload_queue.clear()
+	_retry_at_ms = 0
+	_heartbeat_accum = 0.0
 	if was_connected:
 		connection_changed.emit(false)
 
@@ -116,20 +139,34 @@ func _authenticate(op: String, name: String, password: String) -> Dictionary:
 func upload_account(account: SingleAccount) -> void:
 	if !is_logged_in() or account == null:
 		return
-	_upload_queue.append(account.to_dict())
+	_upload_queue.append({"account": account.to_dict(), "attempts": 0})
 
 
 func _pump_uploads() -> void:
 	if _uploading or _upload_queue.is_empty() or !is_logged_in():
 		return
+	if Time.get_ticks_msec() < _retry_at_ms:
+		return
 	_uploading = true
-	var account_dict: Dictionary = _upload_queue.pop_front()
-	var response := await _request({"op": "upload", "token": token, "account": account_dict})
+	var item: Dictionary = _upload_queue.pop_front()
+	var response := await _request({"op": "upload", "token": token, "account": item["account"]})
 	_uploading = false
-	var ok: bool = response.get("ok", false)
-	upload_finished.emit(ok, str(response.get("error", "")))
-	if !ok:
-		push_warning("[online] 上传存档失败：%s" % response.get("error", ""))
+
+	if response.get("ok", false):
+		upload_finished.emit(true, "")
+		return
+
+	item["attempts"] = int(item.get("attempts", 0)) + 1
+	var message := str(response.get("error", "上传失败"))
+	if int(item["attempts"]) < MAX_UPLOAD_RETRIES:
+		# 放回队首，等一会儿再试，避免这一局的成绩直接丢掉
+		_upload_queue.push_front(item)
+		_retry_at_ms = Time.get_ticks_msec() + 2000 * int(item["attempts"])
+		push_warning("[online] 上传存档失败（第 %d 次），将重试：%s" % [item["attempts"], message])
+	else:
+		_retry_at_ms = 0
+		upload_finished.emit(false, message)
+		push_warning("[online] 上传存档失败，已重试 %d 次：%s" % [MAX_UPLOAD_RETRIES, message])
 
 
 func fetch_leaderboard(limit: int = 20) -> Dictionary:

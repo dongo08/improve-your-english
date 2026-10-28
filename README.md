@@ -19,7 +19,7 @@
 
 ## 词库
 
-词库来自根目录的 3000 词 xlsx 与原 `assets/gaozhong.tres` 合并，生成 `assets/wordbook.tres`：
+词库来自根目录的 3000 词 xlsx，合并后生成二进制资源 `assets/wordbook.res`（3.2 MB，文本版是 4.4 MB）：
 
 当前 **4129 词 / 24936 条词义**，其中初级 1537、中级 478、高级 2114。
 
@@ -45,6 +45,7 @@ godot --headless --path . res://tools/verify_wordbook.tscn
 
 - 解析脚本会处理脏数据：Excel 自动转成布尔值的 `false`、括号里的另一种拼写（`criticise(criticize)`）、`a.&ad.` 这类合并词性、全角标点、多余空格。
 - 合并时同一个词（不分大小写，含括号别名）只保留一条，重复的只补新词义，并顺手去掉完全相同的词义。
+- 合并工具会以上一次的 `wordbook.res` 为基础（没有才退回旧的 `gaozhong.tres`），所以中间产物删掉了也能继续增量更新。
 
 ## 存档
 
@@ -107,7 +108,10 @@ godot --headless --path . res://server/server_main.tscn -- --port=9000 --data=us
 
 - `--port` 监听端口，默认 9000；`--data` 账号数据文件。
 - 服务端用 TCP + 一行一个 JSON 通信，协议见 `server/account_server.gd` 顶部注释。
-- 密码用随机盐 + SHA-256 存哈希；上传存档时服务端会用 `plays` 重算积分和总 pp，客户端改数没用。
+- 密码用随机盐 + 10 万轮 SHA-256；登录失败 5 次锁 10 分钟。
+- 上传存档时服务端只信 correct/wrong，按公式重算单场 pp、得分和总 pp，客户端改数字没用。
+- 存档写入走 `.tmp → .bak → 正式文件`，主文件损坏时自动回滚到备份。
+- 断开的连接会被回收，空闲 120 秒踢掉，单进程最多 64 个连接。
 - 自带只读网页面板：`http://127.0.0.1:8080/`，看账号、pp 排行、最近战绩；加 `--admin-password=xxx` 可对外访问并要求密码。见 [server/README.md](server/README.md)。
 - 更详细的部署说明见 [server/README.md](server/README.md)。
 
@@ -134,7 +138,7 @@ server/             独立账号服务端（server.cfg 配置、web 面板）
 start_server.bat    Windows 一键启动服务端
 tools/              词库导入与合并、自检
 tests/              自动化测试与截图工具
-assets/             wordbook.tres（合并后的词库）等
+assets/             wordbook.res（合并后的词库）等
 ```
 
 ## 开发与测试
@@ -148,6 +152,9 @@ godot --headless --path . res://tests/game_test.tscn
 
 # 结算链路：真实加载 answer_area，检查 pp / 逐词记录 / 存档
 godot --headless --path . res://tests/session_test.tscn
+
+# 服务端数据层：伪造 pp 被重算、坏存档回滚、密码哈希、背包/体力清洗
+godot --headless --path . res://tests/server_data_test.tscn
 
 # 联机对战（两个进程，先房主后客户端）
 godot --headless --path . res://tests/mp_test.tscn -- --host
